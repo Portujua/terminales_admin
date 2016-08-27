@@ -1,0 +1,105 @@
+<form class="agregar agregar_personal" name="agregar" ng-controller="Personal" ng-submit="registrar_personal()" novalidate>
+	<div class="register-form">
+		<p class="btn-volver">
+			<a class="btn btn-link" href="./#/personal">&larr; Volver</a>
+		</p>
+
+		<h1 style="font-size: 20px;">Personal &rarr; {{ editar ? 'Editar' : 'Agregar' }}</h1>
+
+		<p><small>(*) Campos obligatorios</small></p>
+
+		<div class="fila">
+			<p>Usuario (*)</p>
+			<input type="text" ng-model="personal_nuevo.usuario" name="usuario" ng-minlength=5 ng-maxlength=32 placeholder="Usuario" required ng-model-options="{ updateOn: 'blur' }" unique-bd="usuario" autocomplete="off" />
+
+			<span ng-show="agregar.usuario.$error.minlength">El usuario debe contener al menos 5 caracteres</span>
+			<span ng-show="agregar.usuario.$error.maxlength">Nombre de usuario muy largo!</span>
+			<span ng-show="agregar.usuario.$error.unique && personal_nuevo.usuario.length > 0">Nombre de usuario ya existente</span>
+		</div>
+
+		<div class="fila">
+			<p>Contraseña (*)</p>
+			<input type="password" ng-model="personal_nuevo.contrasena" name="contrasena" ng-minlength=5 ng-maxlength=32 required placeholder="Contraseña" autocomplete="new-password" />
+
+			<span ng-show="agregar.contrasena.$error.minlength">La contraseña debe contener al menos 5 caracteres</span>
+			<span ng-show="agregar.contrasena.$error.maxlength">Contraseña muy larga!</span>
+		</div>
+
+		<div class="fila">
+			<p>Nombre (*)</p>
+			<input type="text" ng-model="personal_nuevo.nombre" name="nombre" ng-minlength=1 ng-maxlength=32 required placeholder="Nombre" />
+		</div>
+
+		<div class="fila">
+			<p>Segundo Nombre</p>
+			<input type="text" ng-model="personal_nuevo.snombre" name="snombre" ng-minlength=0 ng-maxlength=32 ng-init="personal_nuevo.snombre = ''" placeholder="Segundo nombre" />
+		</div>
+
+		<div class="fila">
+			<p>Apellido (*)</p>
+			<input type="text" ng-model="personal_nuevo.apellido" name="apellido" ng-minlength=1 ng-maxlength=32 required placeholder="Apellido" />
+		</div>
+
+		<div class="fila">
+			<p>Segundo Apellido</p>
+			<input type="text" ng-model="personal_nuevo.sapellido" name="sapellido" ng-minlength=0 ng-maxlength=32 ng-init="personal_nuevo.sapellido = ''" placeholder="Segundo apellido" />
+		</div>
+
+		<div class="fila">
+			<p>Sexo (*)</p>
+			<select class="selectpicker" title="Selecciona un género" data-width="75%" ng-model="personal_nuevo.sexo" name="sexo" required>
+				<option value="Masculino">Masculino</option>
+				<option value="Femenino">Femenino</option>
+			</select>
+		</div>
+
+		<div class="fila">
+			<p>Fecha de Nacimiento (*)</p>
+			<div class="datepicker-nacimiento" style="width: 100%;">
+				<input type="text" id="fecha_nac" class="form-control" ng-model="personal_nuevo.fecha_nacimiento" name="fecha_nac" style="font-size: 11px;" readonly required />
+			</div>
+
+			<script type="text/javascript">
+				$('.datepicker-nacimiento input').datepicker({});
+			</script>
+		</div>
+
+		<div class="fila">
+			<p>Cédula</p>
+			<input type="text" ng-model="personal_nuevo.cedula" name="cedula" ng-minlength=0 ng-maxlength=32 ng-init="personal_nuevo.cedula = ''" placeholder="Cédula" />
+		</div>
+
+		<div class="fila">
+			<p>Correo electrónico</p>
+			<input type="email" ng-model="personal_nuevo.email" name="email" ng-minlength=0 ng-maxlength=32 ng-init="personal_nuevo.email = ''" placeholder="Email" />
+		</div>
+
+		<div class="fila">
+			<p>Teléfono</p>
+			<input type="text" ng-model="personal_nuevo.telefono" name="tlf" ng-minlength=0 ng-maxlength=32 ng-init="personal_nuevo.telefono = ''" placeholder="Teléfono" />
+		</div>
+
+		<div class="fila">
+			<p>Cargo (*)</p>
+			<select class="selectpicker" data-live-search="true" title="" data-width="75%" ng-model="personal_nuevo.cargos" name="dpto" ng-options="c.id as c.nombre for c in cargos" required ng-minlength=1 multiple></select>
+		</div>
+
+		<div>
+			<h3 ng-init="cargar_permisos(); personal_nuevo.permisos = '';">Permisos <small class="btn btn-link" ng-click="todos_los_permisos()">Marcar todos</small></h3>
+
+			<div class="categoria_permiso" ng-repeat="categoria in permisos | soloCategorias">
+				<h4>{{ categoria }}</h4>
+
+				<p ng-repeat="p in permisos" ng-if="p.categoria == categoria" ng-click="cambiar_permiso(p.id, p.riesgo)" class="permiso {{ personal_nuevo.permisos.indexOf('[' + p.id + ']') == -1 ? '' : 'bg-success' }}"  style="border: 1px solid {{ p.riesgo < 4 ? '#449d44' : (p.riesgo < 8 ? '#ec971f' : '#c9302c') }}">
+					<span style="color: {{ p.riesgo < 4 ? '#449d44' : (p.riesgo < 8 ? '#ec971f' : '#c9302c') }}">Nivel de riesgo: {{ p.riesgo }} / 10</span><br/>
+					<span>{{ p.descripcion }}</span>
+				</p>
+			</div>
+		</div>
+
+
+		<div class="fila text-center">
+			<button type="submit" class="btn btn-primary" ng-disabled="agregar.$invalid">Aceptar</button>
+		</div>
+	</div>
+</form>

@@ -1,0 +1,20 @@
+<div class="navbar" ng-show="loginService.isLoggedIn()">
+	<img src="img/logo2.png" />
+	<p style="color: white; text-align: center; margin-left: -10px; font-size: 14px;">TERMINAL DE AUTOBUSES</p>
+
+	<p style="color: white;"><strong>{{ loginService.getCurrentUser().nombre + " " + loginService.getCurrentUser().apellido }}</strong> <span class="glyphicon glyphicon-off pull-right" ng-click="logout()" style="color: #c9302c !important;" aria-hidden="true" title="Cerrar sesión"></span></p>
+	<p style="color: white;"><small>Última visita: {{ loginService.getCurrentUser().ultima_visita.fecha.length > 0 ? loginService.getCurrentUser().ultima_visita.fecha + ' a las ' + loginService.getCurrentUser().ultima_visita.hora : 'Nunca' }}</small></p>
+
+	<p class="titulo_seccion" data-toggle="collapse" data-target=".admin"
+		ng-show="loginService.menuAdmin()">
+		Administración
+	</p>
+
+	<div class="admin collapse" aria-expanded="false">
+		<a href="./#/personal" ng-show="loginService.menuAdminPersonal()">
+			<p>Personal</p>
+		</a>
+	</div>
+</div>
+
+<a href="" ng-click="cerrar_seccion()" class="cerrar_seccion" ng-show="!enInicio"><span aria-hidden="true">&times;</span></a>

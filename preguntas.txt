@@ -1,0 +1,4 @@
+Necesario en APACHE:
+- Tamaño post
+- Tamaño upload
+- max_input_vars
