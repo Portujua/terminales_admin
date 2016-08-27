@@ -1,3 +1,9 @@
+insert into Lugar (nombre, tipo) values ("Caracas", "Ciudad"),
+	("Maracay", "Ciudad"),
+	("Guatire", "Ciudad"),
+	("Maracaibo", "Ciudad"),
+	("Táchira", "Ciudad");
+
 insert into Cargo (nombre) values ('Cajero'), ('Chofer'), ('Administrador');
 
 insert into Tipo_de_Unidad (nombre) values ('Interna'), ('Externa');

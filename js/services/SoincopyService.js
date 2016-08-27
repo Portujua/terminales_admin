@@ -21,6 +21,13 @@
 					$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
 				});
 			},
+
+			getLugares: function(s){
+				$http.get("api/lugares").then(function(obj){
+					s.lugares = obj.data;
+					$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
+				});
+			},
 		};
 	})
 }());

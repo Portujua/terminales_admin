@@ -2492,5 +2492,17 @@
 
             return json_encode($query->fetchAll());
         }
+
+        public function cargar_lugares($post)
+        {
+            $query = $this->db->prepare("
+                select *
+                from Lugar
+                order by nombre asc
+            ");
+            $query->execute();
+
+            return json_encode($query->fetchAll());
+        }
 	}
 ?>
