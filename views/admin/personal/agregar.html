@@ -47,10 +47,7 @@
 
 		<div class="fila">
 			<p>Sexo (*)</p>
-			<select class="selectpicker" title="Selecciona un género" data-width="75%" ng-model="personal_nuevo.sexo" name="sexo" required>
-				<option value="Masculino">Masculino</option>
-				<option value="Femenino">Femenino</option>
-			</select>
+			<select class="selectpicker" title="Selecciona un género" data-width="75%" ng-model="personal_nuevo.sexo" ng-options="s as s for s in ['Masculino', 'Femenino']" name="sexo" required></select>
 		</div>
 
 		<div class="fila">
