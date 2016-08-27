@@ -1315,17 +1315,6 @@
             return "ok";
         }
 
-        public function agregar_dependencia($post)
-        {
-            $query = $this->db->prepare("insert into Dependencia (nombre) values (:nombre)");
-
-            $query->execute(array(
-                ":nombre" => $post['nombre']
-            ));
-
-            return "ok";
-        }
-
         public function agregar_proveedor($post)
         {
             $query = $this->db->prepare("
@@ -2503,6 +2492,67 @@
             $query->execute();
 
             return json_encode($query->fetchAll());
+        }
+
+        public function cargar_terminales($post)
+        {
+            $query = $this->db->prepare("
+                select t.id as id, t.nombre as nombre, t.capacidad as capacidad, t.lugar as lugar, l.nombre as direccion, t.estado as estado
+                from Terminal as t, Lugar as l
+                where t.lugar=l.id
+                order by t.nombre asc
+            ");
+            $query->execute();
+
+            return json_encode($query->fetchAll());
+        }
+
+        public function agregar_terminal($post)
+        {
+            $query = $this->db->prepare("
+                insert into Terminal (nombre, capacidad, lugar) 
+                values (:nombre, :capacidad, :lugar)
+            ");
+
+            $query->execute(array(
+                ":nombre" => $post['nombre'],
+                ":capacidad" => $post['capacidad'],
+                ":lugar" => $post['lugar']
+            ));
+
+            return "ok";
+        }
+
+        public function cambiar_estado_terminal($post)
+        {
+            $query = $this->db->prepare("
+                update Terminal set estado=:estado where id=:id
+            ");
+
+            $query->execute(array(
+                ":id" => $post['id'],
+                ":estado" => $post['estado']
+            ));
+        }
+
+        public function editar_terminal($post)
+        {
+            $query = $this->db->prepare("
+                update Terminal set 
+                    nombre=:nombre,
+                    capacidad=:capacidad,
+                    lugar=:lugar
+                where id=:id
+            ");
+
+            $query->execute(array(
+                ":nombre" => $post['nombre'],
+                ":capacidad" => $post['capacidad'],
+                ":lugar" => $post['lugar'],
+                ":id" => $post['id']
+            ));
+
+            return "ok";
         }
 	}
 ?>

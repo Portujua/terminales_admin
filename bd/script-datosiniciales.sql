@@ -22,3 +22,9 @@ insert into Permiso_Categoria (nombre) values ('Personal');
 insert into Permiso (nombre, descripcion, riesgo, categoria) values ('personal_agregar', 'Podrá añadir nuevo personal al sistema', 6, 1),
 	('personal_editar', 'Podrá editar cualquier personal disponible en el sistema', 6, 1),
 	('personal_deshabilitar', 'Podrá deshabilitar cualquier personal disponible en el sistema', 5, 1);
+
+insert into Permiso_Categoria (nombre) values ('Terminales');
+
+insert into Permiso (nombre, descripcion, riesgo, categoria) values ('terminales_agregar', 'Podrá añadir nuevos terminales al sistema', 6, 2),
+	('terminales_editar', 'Podrá editar cualquier terminal disponible en el sistema', 6, 2),
+	('terminales_deshabilitar', 'Podrá deshabilitar cualquier terminal disponible en el sistema', 5, 2);

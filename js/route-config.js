@@ -22,6 +22,19 @@
 			})
 
 
+
+
+			.when("/terminales", {
+				templateUrl : "views/admin/terminales/terminales.html"
+			})
+			.when("/terminales/agregar", {
+				templateUrl : "views/admin/terminales/agregar.html"
+			})
+			.when("/terminales/editar/:id", {
+				templateUrl : "views/admin/terminales/agregar.html"
+			})
+
+
 			.otherwise({redirectTo : "/login"});
 	});
 }());

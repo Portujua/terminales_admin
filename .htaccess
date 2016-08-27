@@ -28,6 +28,7 @@ RewriteRule ^api/personal$ /qa_terminal_admin/php/run.php?fn=cargar_personal [QS
 RewriteRule ^api/cargos$ /qa_terminal_admin/php/run.php?fn=cargar_cargos [QSA,L]
 RewriteRule ^api/permisos$ /qa_terminal_admin/php/run.php?fn=cargar_permisos [QSA,L]
 RewriteRule ^api/lugares$ /qa_terminal_admin/php/run.php?fn=cargar_lugares [QSA,L]
+RewriteRule ^api/terminales$ /qa_terminal_admin/php/run.php?fn=cargar_terminales [QSA,L]
 
 RewriteRule ^api/guias/(.+)$ /qa_terminal_admin/php/run.php?fn=cargar_guias&status=$1 [QSA,L]
 

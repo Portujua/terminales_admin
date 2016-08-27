@@ -6,6 +6,7 @@
 				return this.user != null;
 			},
 			logout: function(){
+				$localStorage.$reset();
 				window.location.reload(true);
 			},
 			login: function(loginData){
@@ -40,12 +41,20 @@
 
 				return this.user.personal_agregar || this.user.personal_editar || this.user.personal_deshabilitar;
 			},
+
+			menuAdminTerminales: function(){
+				if (!this.isLoggedIn()) return false;
+
+				if (this.user.username == "root") return true;
+
+				return this.user.terminales_agregar || this.user.terminales_editar || this.user.terminales_deshabilitar;
+			},
 			menuAdmin: function(){
 				if (!this.isLoggedIn()) return false;
 
 				if (this.user.username == "root") return true;
 
-				return this.menuAdminPersonal();
+				return this.menuAdminPersonal() || this.menuAdminTerminales();
 			}
 		};
 	})

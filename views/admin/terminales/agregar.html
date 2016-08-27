@@ -1,0 +1,31 @@
+<form class="agregar agregar_terminal" name="agregar" ng-controller="Terminal" ng-submit="registrar_terminal()" novalidate>
+	<div class="register-form">
+		<p class="btn-volver">
+			<a class="btn btn-link" href="./#/terminales">&larr; Volver</a>
+		</p>
+
+		<h1 style="font-size: 20px;">Terminales &rarr; {{ editar ? 'Editar' : 'Agregar' }}</h1>
+
+		<p><small>(*) Campos obligatorios</small></p>
+
+		<div class="fila">
+			<p>Nombre (*)</p>
+			<input type="text" ng-model="terminal.nombre" name="nombre" ng-minlength=1 ng-maxlength=128 required placeholder="Nombre" />
+		</div>
+
+		<div class="fila">
+			<p>Capacidad (*)</p>
+			<input type="number" ng-model="terminal.capacidad" name="capacidad" ng-min=1 required placeholder="Capacidad" />
+		</div>
+
+		<div class="fila">
+			<p>Dirección (*)</p>
+			<select class="selectpicker" data-live-search="true" title="" data-width="75%" ng-model="terminal.lugar" name="lugar" ng-options="c.id as c.nombre for c in lugares" required></select>
+		</div>
+
+		
+		<div class="fila text-center">
+			<button type="submit" class="btn btn-primary" ng-disabled="agregar.$invalid">Aceptar</button>
+		</div>
+	</div>
+</form>
