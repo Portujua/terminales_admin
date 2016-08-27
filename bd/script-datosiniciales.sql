@@ -10,6 +10,8 @@ insert into Tipo_de_Unidad (nombre) values ('Interna'), ('Externa');
 
 insert into Estado_de_Unidad (nombre) values ('Accidentada'), ('En viaje'), ('Parada');
 
+insert into Marca (nombre) values ("Marca uno"), ("Marca dos");
+
 insert into Servicio (nombre, icono) values ('Aire acondicionado', 'img/servicios/aire.png'),
 	('Asientos reclinables', 'img/servicios/asientos.png'),
 	('Baños', 'img/servicios/banos.png'),
@@ -28,3 +30,9 @@ insert into Permiso_Categoria (nombre) values ('Terminales');
 insert into Permiso (nombre, descripcion, riesgo, categoria) values ('terminales_agregar', 'Podrá añadir nuevos terminales al sistema', 6, 2),
 	('terminales_editar', 'Podrá editar cualquier terminal disponible en el sistema', 6, 2),
 	('terminales_deshabilitar', 'Podrá deshabilitar cualquier terminal disponible en el sistema', 5, 2);
+
+insert into Permiso_Categoria (nombre) values ('Unidades');
+
+insert into Permiso (nombre, descripcion, riesgo, categoria) values ('unidades_agregar', 'Podrá añadir nuevas unidades al sistema', 6, 3),
+	('unidades_editar', 'Podrá editar cualquier unidad disponible en el sistema', 6, 3),
+	('unidades_deshabilitar', 'Podrá deshabilitar cualquier unidad disponible en el sistema', 5, 3);

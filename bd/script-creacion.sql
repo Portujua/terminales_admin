@@ -141,6 +141,7 @@ create table Unidad (
 	modelo varchar(128),
 	ano_fabricacion int,
 	puestos int comment 'Temporal.. en caso de aprobado este campo no existiria',
+	estado tinyint(1) default 1,
 	primary key(id),
 	foreign key (marca) references Marca(id),
 	foreign key (tipo) references Tipo_de_Unidad(id)

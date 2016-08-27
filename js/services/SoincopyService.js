@@ -15,6 +15,20 @@
 				});
 			},
 
+			getMarcas: function(s){
+				$http.get("api/marcas").then(function(obj){
+					s.marcas = obj.data;
+					$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
+				});
+			},
+
+			getTiposDeUnidades: function(s){
+				$http.get("api/unidades/tipos").then(function(obj){
+					s.tipos_unidad = obj.data;
+					$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
+				});
+			},
+
 			getPermisos: function(s){
 				$http.get("api/permisos").then(function(obj){
 					s.permisos = obj.data;
@@ -45,6 +59,31 @@
 						{
 							json[i].capacidad = parseInt(json[i].capacidad);
 							s.terminal = json[i];
+							$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
+							return;
+						}
+				});
+			},
+
+
+
+			getUnidades: function(s){
+				$http.get("api/unidades").then(function(obj){
+					s.unidades = obj.data;
+					$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
+				});
+			},
+
+			getUnidad: function(s, id){
+				$http.get("api/unidades").then(function(obj){
+					var json = obj.data;
+
+					for (var i = 0; i < json.length; i++)
+						if (json[i].id == id)
+						{
+							json[i].ano_fabricacion = parseInt(json[i].ano_fabricacion);
+							json[i].puestos = parseInt(json[i].puestos);
+							s.unidad = json[i];
 							$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
 							return;
 						}

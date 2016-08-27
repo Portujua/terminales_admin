@@ -1,0 +1,56 @@
+<form class="agregar agregar_unidad" name="agregar" ng-controller="Unidad" ng-submit="registrar_unidad()" novalidate>
+	<div class="register-form">
+		<p class="btn-volver">
+			<a class="btn btn-link" href="./#/unidades">&larr; Volver</a>
+		</p>
+
+		<h1 style="font-size: 20px;">Unidades &rarr; {{ editar ? 'Editar' : 'Agregar' }}</h1>
+
+		<p><small>(*) Campos obligatorios</small></p>
+
+		<div class="fila">
+			<p>Placa (*)</p>
+			<input type="text" ng-model="unidad.placa" name="placa" ng-minlength=1 ng-maxlength=10 required placeholder="Placa" />
+		</div>
+
+		<div class="fila">
+			<p>Serial motor (*)</p>
+			<input type="text" ng-model="unidad.serial_motor" name="serial_motor" ng-minlength=1 ng-maxlength=128 required placeholder="Serial motor" />
+		</div>
+
+		<div class="fila">
+			<p>Serial carrocería (*)</p>
+			<input type="text" ng-model="unidad.serial_carroceria" name="serial_carroceria" ng-minlength=1 ng-maxlength=128 required placeholder="Serial carrocería" />
+		</div>
+
+		<div class="fila">
+			<p>Marca (*)</p>
+			<select class="selectpicker" data-live-search="true" title="" data-width="75%" ng-model="unidad.marca" name="marca" ng-options="c.id as c.nombre for c in marcas" required></select>
+		</div>
+
+		<div class="fila">
+			<p>Tipo (*)</p>
+			<select class="selectpicker" data-live-search="true" title="" data-width="75%" ng-model="unidad.tipo" name="marca" ng-options="c.id as c.nombre for c in tipos_unidad" required></select>
+		</div>
+
+		<div class="fila">
+			<p>Modelo (*)</p>
+			<input type="text" ng-model="unidad.modelo" name="modelo" ng-minlength=1 ng-maxlength=128 required placeholder="Modelo" />
+		</div>
+
+		<div class="fila">
+			<p>Año de fabricación (*)</p>
+			<input type="number" ng-model="unidad.ano_fabricacion" name="ano_fabricacion" required placeholder="Año de fabricación" />
+		</div>
+
+		<div class="fila">
+			<p>Puestos (*)</p>
+			<input type="number" ng-model="unidad.puestos" name="puestos" required placeholder="Número de puestos" />
+		</div>
+
+		
+		<div class="fila text-center">
+			<button type="submit" class="btn btn-primary" ng-disabled="agregar.$invalid">Aceptar</button>
+		</div>
+	</div>
+</form>

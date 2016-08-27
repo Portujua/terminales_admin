@@ -2554,5 +2554,104 @@
 
             return "ok";
         }
+
+        public function cargar_unidades($post)
+        {
+            $query = $this->db->prepare("
+                select u.id as id, u.placa as placa, u.serial_motor as serial_motor, u.serial_carroceria as serial_carroceria, u.marca as marca, u.tipo as tipo, u.modelo as modelo, u.ano_fabricacion as ano_fabricacion, u.puestos as puestos, tu.nombre as tipo_nombre, m.nombre as marca_nombre, u.estado as estado
+                from Unidad as u, Tipo_de_Unidad as tu, Marca as m
+                where u.tipo=tu.id and u.marca=m.id
+            ");
+            $query->execute();
+
+            return json_encode($query->fetchAll());
+        }
+
+        public function cargar_marcas($post)
+        {
+            $query = $this->db->prepare("
+                select *
+                from Marca
+                order by nombre asc
+            ");
+            $query->execute();
+
+            return json_encode($query->fetchAll());
+        }
+
+        public function cargar_tipos_unidades($post)
+        {
+            $query = $this->db->prepare("
+                select *
+                from Tipo_de_Unidad
+                order by nombre asc
+            ");
+            $query->execute();
+
+            return json_encode($query->fetchAll());
+        }
+
+        public function agregar_unidad($post)
+        {
+            $query = $this->db->prepare("
+                insert into Unidad (placa, serial_motor, serial_carroceria, marca, tipo, modelo, ano_fabricacion, puestos) 
+                values (:placa, :serial_motor, :serial_carroceria, :marca, :tipo, :modelo, :ano_fabricacion, :puestos)
+            ");
+
+            $query->execute(array(
+                ":placa" => $post['placa'],
+                ":serial_motor" => $post['serial_motor'],
+                ":serial_carroceria" => $post['serial_carroceria'],
+                ":marca" => $post['marca'],
+                ":tipo" => $post['tipo'],
+                ":modelo" => $post['modelo'],
+                ":ano_fabricacion" => $post['ano_fabricacion'],
+                ":puestos" => $post['puestos']
+            ));
+
+            return "ok";
+        }
+
+        public function editar_unidad($post)
+        {
+            $query = $this->db->prepare("
+                update Unidad set 
+                    placa=:placa, 
+                    serial_motor=:serial_motor, 
+                    serial_carroceria=:serial_carroceria, 
+                    marca=:marca, 
+                    tipo=:tipo, 
+                    modelo=:modelo, 
+                    ano_fabricacion=:ano_fabricacion, 
+                    puestos=:puestos 
+                where id=:id
+            ");
+
+            $query->execute(array(
+                ":placa" => $post['placa'],
+                ":serial_motor" => $post['serial_motor'],
+                ":serial_carroceria" => $post['serial_carroceria'],
+                ":marca" => $post['marca'],
+                ":tipo" => $post['tipo'],
+                ":modelo" => $post['modelo'],
+                ":ano_fabricacion" => $post['ano_fabricacion'],
+                ":puestos" => $post['puestos'],
+                ":id" => $post['id']
+            ));
+
+            return "ok";
+        }
+
+        public function cambiar_estado_unidad($post)
+        {
+            $query = $this->db->prepare("
+                update Unidad set estado=:estado where id=:id
+            ");
+
+            $query->execute(array(
+                ":id" => $post['id'],
+                ":estado" => $post['estado']
+            ));
+        }
 	}
 ?>

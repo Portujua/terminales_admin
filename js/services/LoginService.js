@@ -41,7 +41,6 @@
 
 				return this.user.personal_agregar || this.user.personal_editar || this.user.personal_deshabilitar;
 			},
-
 			menuAdminTerminales: function(){
 				if (!this.isLoggedIn()) return false;
 
@@ -49,12 +48,19 @@
 
 				return this.user.terminales_agregar || this.user.terminales_editar || this.user.terminales_deshabilitar;
 			},
+			menuAdminUnidades: function(){
+				if (!this.isLoggedIn()) return false;
+
+				if (this.user.username == "root") return true;
+
+				return this.user.unidades_agregar || this.user.unidades_editar || this.user.unidades_deshabilitar;
+			},
 			menuAdmin: function(){
 				if (!this.isLoggedIn()) return false;
 
 				if (this.user.username == "root") return true;
 
-				return this.menuAdminPersonal() || this.menuAdminTerminales();
+				return this.menuAdminPersonal() || this.menuAdminTerminales() || this.menuAdminUnidades();
 			}
 		};
 	})

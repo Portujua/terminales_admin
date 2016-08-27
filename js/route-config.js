@@ -35,6 +35,18 @@
 			})
 
 
+
+			.when("/unidades", {
+				templateUrl : "views/admin/unidades/unidades.html"
+			})
+			.when("/unidades/agregar", {
+				templateUrl : "views/admin/unidades/agregar.html"
+			})
+			.when("/unidades/editar/:id", {
+				templateUrl : "views/admin/unidades/agregar.html"
+			})
+
+
 			.otherwise({redirectTo : "/login"});
 	});
 }());
