@@ -36,3 +36,9 @@ insert into Permiso_Categoria (nombre) values ('Unidades');
 insert into Permiso (nombre, descripcion, riesgo, categoria) values ('unidades_agregar', 'Podrá añadir nuevas unidades al sistema', 6, 3),
 	('unidades_editar', 'Podrá editar cualquier unidad disponible en el sistema', 6, 3),
 	('unidades_deshabilitar', 'Podrá deshabilitar cualquier unidad disponible en el sistema', 5, 3);
+
+insert into Permiso_Categoria (nombre) values ('Viajes');
+
+insert into Permiso (nombre, descripcion, riesgo, categoria) values ('viajes_agregar', 'Podrá añadir nuevos viajes al sistema', 6, 4),
+	('viajes_editar', 'Podrá editar cualquier viaje disponible en el sistema', 6, 4),
+	('viajes_deshabilitar', 'Podrá deshabilitar cualquier viaje disponible en el sistema', 5, 4);

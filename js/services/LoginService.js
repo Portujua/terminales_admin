@@ -55,12 +55,19 @@
 
 				return this.user.unidades_agregar || this.user.unidades_editar || this.user.unidades_deshabilitar;
 			},
+			menuAdminViajes: function(){
+				if (!this.isLoggedIn()) return false;
+
+				if (this.user.username == "root") return true;
+
+				return this.user.viajes_agregar || this.user.viajes_editar || this.user.viajes_deshabilitar;
+			},
 			menuAdmin: function(){
 				if (!this.isLoggedIn()) return false;
 
 				if (this.user.username == "root") return true;
 
-				return this.menuAdminPersonal() || this.menuAdminTerminales() || this.menuAdminUnidades();
+				return this.menuAdminPersonal() || this.menuAdminTerminales() || this.menuAdminUnidades() || this.menuAdminViajes();
 			}
 		};
 	})

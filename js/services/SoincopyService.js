@@ -89,6 +89,30 @@
 						}
 				});
 			},
+
+			getViajes: function(s){
+				$http.get("api/viajes").then(function(obj){
+					s.viajes = obj.data;
+					$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
+				});
+			},
+
+			getViaje: function(s, id){
+				$http.get("api/viajes").then(function(obj){
+					var json = obj.data;
+
+					for (var i = 0; i < json.length; i++)
+						if (json[i].id == id)
+						{
+							json[i].costo = parseFloat(json[i].costo);
+							s.viaje = json[i];
+							$timeout(function(){$('.selectpicker').selectpicker('refresh');}, 500);
+							return;
+						}
+				});
+			},
+
+
 		};
 	})
 }());

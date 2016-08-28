@@ -22,9 +22,9 @@
             }
             elseif ($this->connect_to == "main")
             {
-                $this->username = "salazars_eduardo";
-                $this->password = "21115476";
-                $this->dsn = "mysql:dbname=salazars_terminales;host=localhost";
+                $this->username = "biopagoc_desarrollo";
+                $this->password = "desarrollo123";
+                $this->dsn = "mysql:dbname=biopagoc_terminales;host=localhost";
             }
             elseif ($this->connect_to == "test")
             {
@@ -2652,6 +2652,79 @@
                 ":id" => $post['id'],
                 ":estado" => $post['estado']
             ));
+        }
+
+        public function agregar_viaje($post)
+        {
+            $query = $this->db->prepare("
+                insert into Viaje (nombre, descripcion, partida, fecha_partida, llegada, fecha_llegada, costo) 
+                values (:nombre, :descripcion, :partida, :fecha_partida, :llegada, :fecha_llegada, :costo)
+            ");
+
+            $query->execute(array(
+                ":nombre" => $post['nombre'],
+                ":descripcion" => $post['descripcion'],
+                ":partida" => $post['lugar_partida'],
+                ":fecha_partida" => $post['partida'],
+                ":llegada" => $post['lugar_llegada'],
+                ":fecha_llegada" => $post['llegada'],
+                ":costo" => $post['costo']
+            ));
+
+            return "ok";
+        }
+
+        public function editar_viaje($post)
+        {
+            $query = $this->db->prepare("
+                update Viaje set 
+                    nombre=:nombre, 
+                    descripcion=:descripcion, 
+                    partida=:partida, 
+                    fecha_partida=:fecha_partida, 
+                    llegada=:llegada, 
+                    fecha_llegada=:fecha_llegada, 
+                    costo=:costo
+                where id=:id
+            ");
+
+            $query->execute(array(
+                ":nombre" => $post['nombre'],
+                ":descripcion" => $post['descripcion'],
+                ":partida" => $post['lugar_partida'],
+                ":fecha_partida" => $post['partida'],
+                ":llegada" => $post['lugar_llegada'],
+                ":fecha_llegada" => $post['llegada'],
+                ":costo" => $post['costo'],
+                ":id" => $post['id']
+            ));
+
+            return "ok";
+        }
+
+        public function cambiar_estado_viaje($post)
+        {
+            $query = $this->db->prepare("
+                update Viaje set estado=:estado where id=:id
+            ");
+
+            $query->execute(array(
+                ":id" => $post['id'],
+                ":estado" => $post['estado']
+            ));
+        }
+
+        public function cargar_viajes($post)
+        {
+            $query = $this->db->prepare("
+                select v.id as id, v.estado as estado, v.nombre as nombre, v.descripcion as descripcion, date_format(v.fecha_partida, '%m/%d/%Y') as fecha_partida, date_format(v.fecha_llegada, '%m/%d/%Y') as fecha_llegada, date_format(v.fecha_partida, '%d/%m/%Y') as fecha_partida_str, date_format(v.fecha_llegada, '%d/%m/%Y') as fecha_llegada_str, v.partida as lugar_partida, v.llegada as lugar_llegada, tp.nombre as partida_nombre, lp.nombre as partida_lugar, tl.nombre as llegada_nombre, ll.nombre as llegada_lugar, v.costo as costo
+                from Viaje as v, Terminal as tp, Terminal as tl, Lugar as lp, Lugar as ll
+                where v.partida=tp.id and v.llegada=tl.id and tp.lugar=lp.id and tl.lugar=ll.id
+                order by v.id desc
+            ");
+            $query->execute();
+
+            return json_encode($query->fetchAll());
         }
 	}
 ?>

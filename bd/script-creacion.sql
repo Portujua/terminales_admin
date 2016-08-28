@@ -91,6 +91,8 @@ create table Terminal (
 
 create table Viaje (
 	id int not null auto_increment,
+	nombre varchar(128),
+	descripcion text,
 	partida int not null,
 	fecha_partida datetime not null,
 	llegada int not null,

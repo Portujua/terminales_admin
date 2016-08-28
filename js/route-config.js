@@ -47,6 +47,18 @@
 			})
 
 
+
+			.when("/viajes", {
+				templateUrl : "views/admin/viajes/viajes.html"
+			})
+			.when("/viajes/agregar", {
+				templateUrl : "views/admin/viajes/agregar.html"
+			})
+			.when("/viajes/editar/:id", {
+				templateUrl : "views/admin/viajes/agregar.html"
+			})
+
+
 			.otherwise({redirectTo : "/login"});
 	});
 }());
