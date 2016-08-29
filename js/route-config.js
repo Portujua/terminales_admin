@@ -59,6 +59,11 @@
 			})
 
 
+			.when("/reportes", {
+				templateUrl : "views/admin/reportes/reportes.html"
+			})
+
+
 			.otherwise({redirectTo : "/login"});
 	});
 }());
