@@ -62,6 +62,9 @@
 			.when("/reportes", {
 				templateUrl : "views/admin/reportes/reportes.html"
 			})
+			.when("/reportes/gps", {
+				templateUrl : "views/admin/reportes/gps.html"
+			})
 
 
 			.otherwise({redirectTo : "/login"});
